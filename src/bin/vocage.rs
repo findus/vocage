@@ -247,7 +247,7 @@ fn main() {
                          break;
                      },
                      Key::Char('j') | Key::Down => {
-                         card.move_to_deck(card.deck, &session);
+                         card.move_to_deck(card.deck, &session, true);
                          status = format!("Card retained on deck {}: {}", card.deck+1, session.decks.get(card.deck as usize).unwrap_or(&"unspecified".to_owned())  ).to_owned();
                          changed = true;
                          break;
@@ -263,7 +263,7 @@ fn main() {
                      },
                      Key::Char(c) if NUMCHARS.contains(&c) => {
                          let targetdeck = c as u8 - 49;
-                         if card.move_to_deck(targetdeck, &session) {
+                         if card.move_to_deck(targetdeck, &session, false) {
                              status = format!("Card moved to deck {}: {}", card.deck+1, session.decks.get(card.deck as usize).unwrap_or(&"unspecified".to_owned())  ).to_owned();
                          } else {
                              status = "Invalid deck".to_owned();
